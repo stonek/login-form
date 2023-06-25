@@ -28,7 +28,9 @@
             src="~/assets/images/logo.png"
             class="w-fit md:display-none mt-10 mb-10"
           />
-          <div class="bg-card max-w-sm p-32px min-w-300px rounded-lg">
+          <div
+            class="bg-card max-w-sm p-32px min-w-340px md:min-w-400px rounded-lg"
+          >
             <slot />
           </div>
         </div>
