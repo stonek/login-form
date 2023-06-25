@@ -10,7 +10,7 @@ const activeStepIndex = ref<number>(0);
 const emit = defineEmits(["submitForm"]);
 
 const submitNextText = "Next";
-const submitSaveText = props.submitSaveText ? submitSaveText : 'Save';
+const submitSaveText = props.submitSaveText ? props.submitSaveText : "Save";
 const buttonBackValue = "Back";
 
 const currentSchema = computed(() => {

@@ -21,11 +21,14 @@
         </div>
       </div>
       <div
-        class="right-side w-screen h-screen md:w-1/2 bg-white align-baseline justify-items-center px-5px md:px-10 md:py-10"
+        class="right-side w-screen md:h-screen md:w-1/2 bg-white md:align-baseline md:justify-items-center px-5px md:px-10 md:py-10"
       >
-        <div class="grid h-screen place-items-center">
-          <img src="~/assets/images/logo.png" class="w-fit md:display-none" />
-          <div>
+        <div class="grid md:h-full place-items-center">
+          <img
+            src="~/assets/images/logo.png"
+            class="w-fit md:display-none mt-10 mb-10"
+          />
+          <div class="bg-card max-w-sm p-32px min-w-300px rounded-lg">
             <slot />
           </div>
         </div>

@@ -1,5 +1,5 @@
-interface LoginPaylod {
+interface LoginPayload {
   email: String;
   password: String;
 }
-export { LoginPaylod };
+export { LoginPayload };

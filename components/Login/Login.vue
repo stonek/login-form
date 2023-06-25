@@ -3,6 +3,7 @@ import { object, string } from "yup";
 import { useAuthenticationStore } from "~/store/Authentication";
 import { Step } from "~/types/Form";
 import { LoginPayload } from "@/types/Login";
+const swal = inject("$swal");
 
 const store = useAuthenticationStore();
 const { loginUser } = store;
@@ -13,8 +14,19 @@ const login = reactive<LoginPayload>({});
 const submitForm = async (values: LoginPayload) => {
   try {
     await loginUser(values);
+    swal.fire({
+      icon: "success",
+      title: "You are logged in",
+      showConfirmButton: false,
+    });
   } catch (e) {
     console.log("e", e);
+    swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: JSON.stringify(e.value.data),
+      showConfirmButton: false,
+    });
   }
 };
 
@@ -51,34 +63,32 @@ const firstFormSchema = {
 </script>
 
 <template>
-  <div class="bg-card max-w-sm p-32px rounded-lg">
-    <TheMultiStepForm
-      class="rounded mx-auto"
-      :steps="steps"
-      :show-buttons="showButtons"
-      submit-save-text="Přihlásit se"
-      @submit-form="submitForm"
-    >
-      <template #header>
-        <div class="text-left block md:flex">
-          <h2 class="text-2xl font-bold tracking-tight text-gray-900 mb-4 w-50">
-            Login
-          </h2>
-          <span
-            class="w-100 md:w-80 text-black text-xs leading-8 text-right mt-1"
-          >
-            Jste nový uživatel?
-            <NuxtLink to="/registration" class="text-blue ml-auto underline"
-              >Registrovat se</NuxtLink
-            ></span
-          >
-        </div>
-      </template>
-      <template #step0>
-        <div>
-          <DynamicForm :schema="firstFormSchema" />
-        </div>
-      </template>
-    </TheMultiStepForm>
-  </div>
+  <TheMultiStepForm
+    class="rounded mx-auto"
+    :steps="steps"
+    :show-buttons="showButtons"
+    submit-save-text="Přihlásit se"
+    @submit-form="submitForm"
+  >
+    <template #header>
+      <div class="text-left block md:flex">
+        <h2 class="text-2xl font-bold tracking-tight text-gray-900 mb-4 w-50">
+          Login
+        </h2>
+        <span
+          class="w-100 md:w-80 text-black text-xs leading-8 text-right mt-1"
+        >
+          Jste nový uživatel?
+          <NuxtLink to="/registration" class="text-blue ml-auto underline"
+            >Registrovat se</NuxtLink
+          ></span
+        >
+      </div>
+    </template>
+    <template #step0>
+      <div>
+        <DynamicForm :schema="firstFormSchema" />
+      </div>
+    </template>
+  </TheMultiStepForm>
 </template>

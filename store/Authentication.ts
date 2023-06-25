@@ -1,13 +1,8 @@
 // store/filters.ts
 import { defineStore } from "pinia";
 import { OtpPayload, RegisterPaylod } from "@/types/Register";
-import { LoginPaylod } from "~/types/Login";
+import { LoginPayload } from "~/types/Login";
 const API_URL = "https://userhw.sandbox.esigno.io";
-
-interface RequestState {
-  loading: boolean;
-  error: Error | null;
-}
 
 export const useAuthenticationStore = defineStore({
   id: "authentication",
@@ -22,19 +17,12 @@ export const useAuthenticationStore = defineStore({
       });
       if (error.value) throw error;
     },
-    async loginUser(payload: LoginPaylod) {
-      const { data, pending, error, refresh } = await useFetch(
-        `${API_URL}/users`,
-        {
-          method: "POST",
-          body: payload,
-          onRequestError({ request, options, error }) {
-            console.log(error);
-            throw new Error(error);
-          },
-        }
-      );
-      return data;
+    async loginUser(payload: LoginPayload) {
+      const { error } = await useFetch(`${API_URL}/users`, {
+        method: "POST",
+        body: payload,
+      });
+      if (error.value) throw error;
     },
     async validateCode(payload: OtpPayload) {
       const { error } = await useFetch(
