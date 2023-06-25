@@ -40,7 +40,7 @@ function prevStep() {
       </div>
     </div>
     <slot name="footer">
-      <div v-if="showButtons" class="mt-10 w-full flex row-auto">
+      <div v-if="showButtons" class="mt-32px w-full flex row-auto">
         <button
           v-if="activeStepIndex > 0"
           type="button"
@@ -52,14 +52,14 @@ function prevStep() {
         <button
           v-if="activeStepIndex < props.steps.length - 1"
           type="submit"
-          class="flex ml-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="flex ml-auto rounded-md bg-blue px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           {{ submitNextText }}
         </button>
         <button
           v-if="activeStepIndex === props.steps.length - 1"
           type="submit"
-          class="flex ml-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="flex justify-center items-center w-100 h-10 bg-blue rounded font-semibold text-sm text-center text-white"
         >
           {{ submitSaveText }}
         </button>

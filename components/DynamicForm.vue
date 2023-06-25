@@ -17,7 +17,7 @@
     <label
       :for="name"
       :class="labelClasses"
-      class="block text-sm font-semibold text-gray-900 mt-4"
+      class="block text-sm font-semibold text-gray-900 mt-4 mb-1"
       >{{ label }}</label
     >
     <Field
@@ -41,7 +41,7 @@
         </component>
       </template>
     </Field>
-    <ErrorMessage v-if="!hideErrors" :name="name" class="text-red" />
+    <ErrorMessage v-if="!hideErrors" :name="name" class="text-red text-sm" />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
   <NuxtLayout name="login">
-    <Login />
+    <RegistrationTheOtpPassword />
   </NuxtLayout>
 </template>

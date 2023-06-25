@@ -1,4 +1,9 @@
 interface RegisterPaylod {
   email?: String;
 }
-export { RegisterPaylod };
+
+interface OtpPayload {
+  email: String;
+  code: String;
+}
+export { RegisterPaylod, OtpPayload };
