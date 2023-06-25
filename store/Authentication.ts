@@ -16,19 +16,11 @@ export const useAuthenticationStore = defineStore({
   },
   actions: {
     async register(payload: RegisterPaylod) {
-      try {
-        const { isFetching, error, data } = await useFetch(
-          `${API_URL}/registration`,
-          {
-            method: "POST",
-            body: payload,
-          }
-        );
-        if (error) throw error;
-        else return data;
-      } catch (error) {
-        return error;
-      }
+      const { error } = await useFetch(`${API_URL}/registration`, {
+        method: "POST",
+        body: payload,
+      });
+      if (error.value) throw error;
     },
     async loginUser(payload: LoginPaylod) {
       const { data, pending, error, refresh } = await useFetch(
@@ -45,14 +37,14 @@ export const useAuthenticationStore = defineStore({
       return data;
     },
     async validateCode(payload: OtpPayload) {
-      try {
-        await useFetch(`${API_URL}/registration/${payload.email}/verify`, {
+      const { error } = await useFetch(
+        `${API_URL}/registration/${payload.email}/verify`,
+        {
           method: "POST",
           body: payload,
-        });
-      } catch (e) {
-        console.log(e);
-      }
+        }
+      );
+      if (error.value) throw error;
     },
   },
   getters: {},

@@ -51,19 +51,22 @@ const firstFormSchema = {
 </script>
 
 <template>
-  <div class="bg-card lg:min-w-463px max-w-md p-32px rounded-lg">
+  <div class="bg-card max-w-sm p-32px rounded-lg">
     <TheMultiStepForm
       class="rounded mx-auto"
       :steps="steps"
       :show-buttons="showButtons"
-      @submit-form.once="submitForm"
+      submit-save-text="Přihlásit se"
+      @submit-form="submitForm"
     >
       <template #header>
-        <div class="text-left flex">
+        <div class="text-left block md:flex">
           <h2 class="text-2xl font-bold tracking-tight text-gray-900 mb-4 w-50">
             Login
           </h2>
-          <span class="w-50 text-black text-xs leading-8">
+          <span
+            class="w-100 md:w-80 text-black text-xs leading-8 text-right mt-1"
+          >
             Jste nový uživatel?
             <NuxtLink to="/registration" class="text-blue ml-auto underline"
               >Registrovat se</NuxtLink

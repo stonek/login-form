@@ -3,13 +3,14 @@ import { Step } from "~/types/Form";
 const props = defineProps<{
   steps: Array<Step>;
   showButtons: boolean;
+  submitSaveText: String;
 }>();
 
 const activeStepIndex = ref<number>(0);
 const emit = defineEmits(["submitForm"]);
 
 const submitNextText = "Next";
-const submitSaveText = "Save";
+const submitSaveText = props.submitSaveText ? submitSaveText : 'Save';
 const buttonBackValue = "Back";
 
 const currentSchema = computed(() => {

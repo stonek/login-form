@@ -1,43 +1,30 @@
 <script setup lang="ts">
-import { object, string } from "yup";
 import { useAuthenticationStore } from "~/store/Authentication";
 import { OtpPayload } from "@/types/Register";
-import otpInput from "~/components/Input/OtpInput.vue";
 
 const store = useAuthenticationStore();
 const { validateCode } = store;
+const route = useRoute();
+const email = route.query.email
+  ? route.query.email
+  : await navigateTo({
+      path: "/",
+    });
 
-const done = ref<boolean>(false);
-const showButtons = ref<boolean>(true);
-const registration = reactive<RegisterPaylod>({});
+const payload = reactive<OtpPayload>({
+  code: "",
+  email,
+});
 
-const submitForm = async (values: OtpPayload) => {
+const submitForm = async () => {
   try {
-    await values;
-    done.value = true;
-    showButtons.value = false;
+    await validateCode(payload);
+    await navigateTo({
+      path: "/",
+    });
   } catch (e) {
     console.log("e", e);
   }
-};
-
-const schema = object({
-  otp: string().email().required("Pole je povinné."),
-});
-
-const firstFormSchema = {
-  fields: [
-    {
-      label: "",
-      value: registration?.otp,
-      name: "otp",
-      as: 'input',
-      type: "text",
-      id: "email",
-      class:
-        "bg-white border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5",
-    },
-  ],
 };
 </script>
 
@@ -49,9 +36,19 @@ const firstFormSchema = {
       </h2>
     </div>
     <div>
-      <Form :validation-schema="schema" keep-values @submit="submitForm">
-        <DynamicForm :schema="firstFormSchema" />
-      </Form>
+      <form @submit.prevent="submitForm">
+        <InputOtpInput
+          :digit-count="4"
+          :default="payload?.code"
+          @update:otp="payload.code = $event"
+        />
+        <button
+          type="submit"
+          class="flex justify-center items-center w-100 h-10 bg-blue rounded font-semibold text-sm text-center text-white mt-4"
+        >
+          {{ "Ověřit a pokračovat" }}
+        </button>
+      </form>
     </div>
   </div>
 </template>

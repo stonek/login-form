@@ -6,25 +6,27 @@ import { RegisterPaylod } from "@/types/Register";
 const swal = inject("$swal");
 const store = useAuthenticationStore();
 const { register } = store;
-const router = useRouter();
-const done = ref<boolean>(false);
 const showButtons = ref<boolean>(true);
 const registration = reactive<RegisterPaylod>({});
 
-const submitForm = async (values: RegisterPaylod) => {
-  const data: any = await register(values);
-  console.log("data", data.value.statusCode);
-  if (data.value.statusCode !== 200) {
+async function submitForm(values: RegisterPaylod) {
+  try {
+    await register(values);
+    await navigateTo({
+      path: "/registration/otp",
+      query: {
+        email: values.email,
+      },
+    });
+  } catch (error) {
     swal.fire({
       icon: "error",
       title: "Oops...",
-      text: JSON.stringify(data.value.data),
+      text: "somthing went wrong",
       showConfirmButton: false,
     });
-  } else {
-    router.push({ path: "/registration/otp" });
   }
-};
+}
 
 const schema = object({
   email: string().email().required("Pole je povinné."),
@@ -47,14 +49,14 @@ const firstFormSchema = {
   ],
 };
 </script>
-
 <template>
   <div class="bg-card lg:min-w-463px max-w-md p-32px rounded-lg">
     <TheMultiStepForm
       class="rounded mx-auto"
       :steps="steps"
       :show-buttons="showButtons"
-      @submit-form.once="submitForm"
+      submit-save-text="Registrovat se"
+      @submit-form="submitForm"
     >
       <template #header>
         <div class="text-left">
