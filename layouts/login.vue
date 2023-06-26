@@ -1,22 +1,22 @@
 <template>
   <div>
     <div class="flex h-screen">
-      <div
-        class="left-side display-none w-1/2 md:inline px-10 py-10 justify-items-center align-baseline"
-      >
-        <div class="flex flex-col h-100">
+      <div class="left-side display-none w-1/2 md:inline place-content-center">
+        <div class="flex flex-col h-full max-w-400px mx-auto py-10">
           <img src="~/assets/images/logo.png" class="w-fit" />
-          <div class="content-center align-text-bottom mt-auto">
-            <h1
-              class="text-stone-700 text-40px font-bold tracking-tight text-gray-900 mb-4 leading-9"
-            >
-              Digitální kancelář
-            </h1>
-            <h2
-              class="text-stone-700 text-24px racking-tight text-gray-900 mb-4 leading-7"
-            >
-              Šetří Váš čas i peníze
-            </h2>
+          <div class="grid md:h-full items-center">
+            <div>
+              <h1
+                class="text-stone-700 text-40px font-bold tracking-tight text-gray-900 mb-4 leading-9"
+              >
+                Digitální kancelář
+              </h1>
+              <h2
+                class="text-stone-700 text-24px racking-tight text-gray-900 mb-4 leading-7"
+              >
+                Šetří Váš čas i peníze
+              </h2>
+            </div>
           </div>
         </div>
       </div>
